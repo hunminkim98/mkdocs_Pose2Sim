@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="None">
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>Pose2Sim</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body class="homepage">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href=".">Pose2Sim</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem active">
+                                <a href="." class="nav-link">Introduction</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="installation.md" class="nav-link">Installation</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="pose_estimation.md" class="nav-link">Pose Estimation</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="calibration.md" class="nav-link">Calibration</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="synchronization.md" class="nav-link">Synchronization</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="person_association.md" class="nav-link">Person Association</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="triangulation.md" class="nav-link">Triangulation</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="filtering.md" class="nav-link">Filtering</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="opensim.md" class="nav-link">OpenSim</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="utility.md" class="nav-link">Utility</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#pose2sim" class="nav-link">Pose2Sim</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#how-to-cite-and-how-to-contribute" class="nav-link">How to cite and how to contribute</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#main-to-do-list" class="nav-link">Main To-Do List</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p><a href="https://github.com/perfanalytics/pose2sim/actions/workflows/continuous-integration.yml"><img alt="Continuous integration" src="https://github.com/perfanalytics/pose2sim/actions/workflows/continuous-integration.yml/badge.svg?branch=main" /></a>
+<a href="https://badge.fury.io/py/Pose2Sim"><img alt="PyPI version" src="https://badge.fury.io/py/Pose2Sim.svg" /></a>
+<a href="https://pepy.tech/project/pose2sim"><img alt="Downloads" src="https://static.pepy.tech/badge/pose2sim" /></a>
+<a href="https://github.com/perfanalytics/pose2sim/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/perfanalytics/pose2sim" /></a>
+<a href="https://GitHub.com/perfanalytics/pose2sim/forks"><img alt="GitHub forks" src="https://img.shields.io/github/forks/perfanalytics/pose2sim" /></a>
+<a href="https://github.com/perfanalytics/pose2sim/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/perfanalytics/pose2sim" /></a>
+<a href="https://GitHub.com/perfanalytics/pose2sim/issues?q=is%3Aissue+is%3Aclosed"><img alt="GitHub issues-closed" src="https://img.shields.io/github/issues-closed/perfanalytics/pose2sim" /></a>
+<a href="https://joss.theoj.org/papers/a31cb207a180f7ac9838d049e3a0de26"><img alt="status" src="https://joss.theoj.org/papers/a31cb207a180f7ac9838d049e3a0de26/status.svg" /></a>
+<a href="https://zenodo.org/doi/10.5281/zenodo.10658947"><img alt="DOI" src="https://zenodo.org/badge/501642916.svg" /></a>
+<a href="https://opensource.org/licenses/BSD-3-Clause"><img alt="License" src="https://img.shields.io/badge/License-BSD_3--Clause-blue.svg" /></a></p>
+<h1 id="pose2sim">Pose2Sim</h1>
+<h6 id="nb-please-set-undistort_points-and-handle_lr_swap-to-false-for-now-since-it-currently-leads-to-inaccuracies-ill-try-to-fix-it-soon">N.B:. Please set undistort_points and handle_LR_swap to false for now since it currently leads to inaccuracies. I'll try to fix it soon.</h6>
+<blockquote>
+<p><strong><em>News</em>: Version 0.8:</strong><br />
+<strong>Automatic camera synchronization is now supported!</strong><br />
+<strong>Other recently added features</strong>:<br />
+ Multi-person analysis, Blender visualization, Marker augmentation, Automatic batch processing.  </p>
+</blockquote>
+<!-- Incidentally, right/left limb swapping is now handled, which is useful if few cameras are used;  
+and lens distortions are better taken into account.\ -->
+<blockquote>
+<p>To upgrade, type <code>pip install pose2sim --upgrade</code>.  </p>
+</blockquote>
+<p><br></p>
+<p><code>Pose2Sim</code> provides a workflow for 3D markerless kinematics, as an alternative to the more usual marker-based motion capture methods. It aims to provide a free tool to obtain research-grade results from consumer-grade equipment. Any combination of phone, webcam, GoPro, etc. can be used.</p>
+<p>Pose2Sim stands for "OpenPose to OpenSim", as it uses OpenPose inputs (2D keypoints coordinates obtained from multiple videos) and leads to an OpenSim result (full-body 3D joint angles). Other 2D pose estimators such as BlazePose (MediaPipe), DeepLabCut, AlphaPose, can now be used as inputs.</p>
+<p>If you can only use one single camera and don't mind losing some accuracy, please consider using <a href="https://github.com/davidpagnon/Sports2D">Sports2D</a>.</p>
+<p><img src="https://raw.githubusercontent.com/perfanalytics/pose2sim/main/Content/Pose2Sim_workflow.jpg" width="760"></p>
+<p><img src='https://github.com/perfanalytics/pose2sim/blob/main/Content/Activities_verylow.gif?raw=true' title='Other more or less challenging tasks and conditions.' width="760"></p>
+<blockquote>
+<p><em>N.B.:</em> As always, I am more than happy to welcome contributors (see <a href="#how-to-contribute">How to contribute</a>).
+</br></p>
+</blockquote>
+<p><strong>Pose2Sim releases:</strong>  </p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>v0.1</strong> <em>(08/2021)</em>: Published paper  </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>v0.2</strong> <em>(01/2022)</em>: Published code  </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>v0.3</strong> <em>(01/2023)</em>: Supported other pose estimation algorithms  </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>v0.4</strong> <em>(07/2023)</em>: New calibration tool based on scene measurements  </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>v0.5</strong> <em>(12/2023)</em>: Automatic batch processing  </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>v0.6</strong> <em>(02/2024)</em>: Marker augmentation, Blender visualizer  </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>v0.7</strong> <em>(03/2024)</em>: Multi-person analysis  </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>v0.8 <em>(04/2024)</em>: New synchronization tool</strong>  </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> v0.9: Calibration based on keypoint detection, Handling left/right swaps, Correcting lens distortions  </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> v0.10: Graphical User Interface  </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> v1.0: First accomplished release  </li>
+</ul>
+<h2 id="how-to-cite-and-how-to-contribute"><strong>How to cite and how to contribute</strong></h2>
+<p><strong>How to cite</strong><br />
+If you use this code or data, please cite <a href="https://doi.org/10.21105/joss.04362">Pagnon et al., 2022b</a>, <a href="https://www.mdpi.com/1424-8220/22/7/2712">Pagnon et al., 2022a</a>, or <a href="https://www.mdpi.com/1424-8220/21/19/6530">Pagnon et al., 2021</a>.</p>
+<pre><code>@Article{Pagnon_2022_JOSS, 
+  AUTHOR = {Pagnon, David and Domalain, Mathieu and Reveret, Lionel}, 
+  TITLE = {Pose2Sim: An open-source Python package for multiview markerless kinematics}, 
+  JOURNAL = {Journal of Open Source Software}, 
+  YEAR = {2022},
+  DOI = {10.21105/joss.04362}, 
+  URL = {https://joss.theoj.org/papers/10.21105/joss.04362}
+ }
+
+@Article{Pagnon_2022_Accuracy,
+  AUTHOR = {Pagnon, David and Domalain, Mathieu and Reveret, Lionel},
+  TITLE = {Pose2Sim: An End-to-End Workflow for 3D Markerless Sports Kinematics—Part 2: Accuracy},
+  JOURNAL = {Sensors},
+  YEAR = {2022},
+  DOI = {10.3390/s22072712},
+  URL = {https://www.mdpi.com/1424-8220/22/7/2712}
+}
+
+@Article{Pagnon_2021_Robustness,
+  AUTHOR = {Pagnon, David and Domalain, Mathieu and Reveret, Lionel},
+  TITLE = {Pose2Sim: An End-to-End Workflow for 3D Markerless Sports Kinematics—Part 1: Robustness},
+  JOURNAL = {Sensors},
+  YEAR = {2021},
+  DOI = {10.3390/s21196530},
+  URL = {https://www.mdpi.com/1424-8220/21/19/6530}
+}
+</code></pre>
+<p></br>
+<strong>How to contribute</strong></p>
+<p>I would happily welcome any proposal for new features, code improvement, and more!<br />
+If you want to contribute to Pose2Sim, please see <a href="https://github.com/perfanalytics/pose2sim/issues/40">this issue</a>.<br />
+You will be proposed a to-do list, but please feel absolutely free to propose your own ideas and improvements.</p>
+<p></br></p>
+<h2 id="main-to-do-list"><strong>Main To-Do List</strong></h2>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Synchronization</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Graphical User Interface</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Self-calibration based on keypoint detection</strong></li>
+</ul>
+<p></br></p>
+<h4 id="detailed-got-done-and-to-do-list"><strong>Detailed GOT-DONE and TO-DO list</strong></h4>
+<h5 id="pose"><strong>Pose</strong></h5>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Support OpenPose <a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose_train/tree/master/experimental_models#body_25b-model---option-2-recommended">body_25b</a> for more accuracy, <a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose_train/tree/master/experimental_models#single-network-whole-body-pose-estimation-model">body_135</a> for pronation/supination.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Support <a href="https://developers.google.com/mediapipe/solutions/vision/pose_landmarker">BlazePose</a> for faster inference (on mobile device).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Support <a href="http://www.mackenziemathislab.org/deeplabcut">DeepLabCut</a> for training on custom datasets.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Support <a href="https://github.com/MVIG-SJTU/AlphaPose">AlphaPose</a> as an alternative to OpenPose.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Define custom model in config.toml rather than in skeletons.py.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Support <a href="https://github.com/open-mmlab/mmpose">MMPose</a>, <a href="https://sleap.ai/">SLEAP</a>, etc.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Directly reading from DeepLabCut .csv or .h5 files instead of converting to .json.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> GUI help for DeepLabCut model creation.</li>
+</ul>
+<h5 id="calibration"><strong>Calibration</strong></h5>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Convert <a href="https://www.qualisys.com">Qualisys</a> .qca.txt calibration file.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Convert <a href="https://optitrack.com/">Optitrack</a> extrinsic calibration file.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Convert <a href="http://www.vicon.com/Software/Nexus">Vicon</a> .xcp calibration file.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Convert <a href="https://www.opencap.ai/">OpenCap</a> .pickle calibration files.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Convert <a href="https://github.com/zju3dv/EasyMocap/">EasyMocap</a> .yml calibration files.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Convert <a href="https://github.com/camera-mc-dev/.github/blob/main/profile/mocapPipe.md">bioCV</a> calibration files.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Easier and clearer calibration procedure: separate intrinsic and extrinsic parameter calculation.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Once object points have been detected, track them for live calibration of moving cameras.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Calibrate cameras by pairs and compute average extrinsic calibration.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Fine-tune calibration with bundle adjustment.</li>
+</ul>
+<h5 id="triangulation"><strong>Triangulation</strong></h5>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Triangulation weighted with confidence.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Show mean reprojection error in px and in mm for each keypoint.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Implement normalized DLT and RANSAC triangulation, Outlier rejection.</li>
+</ul>
+<h5 id="filtering"><strong>Filtering</strong></h5>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Available filtering methods: Butterworth, Butterworth on speed, Gaussian, Median, LOESS.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Implement Kalman filter and Kalman smoother.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Implement <a href="https://github.com/perfanalytics/pose2sim/issues/29">smoothNet</a>.</li>
+</ul>
+<h5 id="opensim"><strong>OpenSim</strong></h5>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Integrate better spine from <a href="https://pubmed.ncbi.nlm.nih.gov/30714401">lifting fullbody model</a> to the <a href="https://nmbl.stanford.edu/wp-content/uploads/07505900.pdf">gait full-body model</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Implement optimal fixed-interval Kalman smoothing for inverse kinematics.</li>
+</ul>
+<h5 id="gui"><strong>GUI</strong></h5>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Blender add-on (cf <a href="https://blendermarket.com/products/mocap-mpp2soss">MPP2SOS</a>).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 3D plot of cameras and of triangulated keypoints.</li>
+</ul>
+<h5 id="demo"><strong>Demo</strong></h5>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Provide Demo data for users to test the code.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Add videos for users to experiment with other pose detection frameworks.</li>
+</ul>
+<h5 id="documentation"><strong>Documentation</strong></h5>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Use <a href="https://www.sphinx-doc.org/en/master">Sphinx</a>, <a href="https://www.mkdocs.org">MkDocs</a>, or <a href="https://docs.github.com/fr/pages/quickstart">github.io</a> for clearer documentation.</li>
+</ul>
+<h5 id="bugs"><strong>Bugs</strong></h5>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Bug:</strong> FFMPEG error message when calibration files are images.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Bug:</strong> Python crashes after a few runs of <code>Pose2Sim.filtering()</code> when <code>display_figures=true</code>.</li>
+</ul>
+<p></br></p>
+<p><strong>Acknowledgements:</strong> </p>
+<ul>
+<li>Supervised my PhD: <a href="https://github.com/lreveret">@lreveret</a> (INRIA, Université Grenoble Alpes), and <a href="https://github.com/mdomalai">@mdomalai</a> (Université de Poitiers).  </li>
+<li>Provided the Demo data: <a href="https://github.com/aaiaueil">@aaiaueil</a> from Université Gustave Eiffel.  </li>
+<li>Tested the code and provided feedback: <a href="https://github.com/simonozan">@simonozan</a>, <a href="https://github.com/daeyongyang">@daeyongyang</a>, <a href="https://github.com/ANaaim">@ANaaim</a>, <a href="https://github.com/hunminkim98">@rlagnsals</a>  </li>
+<li>Submitted various accepted pull requests: <a href="https://github.com/ANaaim">@ANaaim</a>, <a href="https://github.com/hunminkim98">@rlagnsals</a>  </li>
+<li>Provided a code snippet for Optitrack calibration: <a href="https://github.com/claraaudap">@claraaudap</a> (Université Bretagne Sud).  </li>
+<li>Issued MPP2SOS, a (non-free) Blender extension based on Pose2Sim: <a href="https://github.com/carlosedubarreto">@carlosedubarreto</a>  </li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js"></script>
+        <script src="search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.5.3
+Build Date UTC : 2024-04-20 01:27:34.778647+00:00
+-->
